@@ -1,0 +1,25 @@
+'''
+Title: Read the “mRNA_seq.fasta” file and translate the sequence in the file.
+Save the translated amino acid sequence in another FASTA file
+'''
+
+# import packages
+from Bio.Seq import Seq
+
+# read mRNA_seq.fasta file
+with open("mRNA_seq.fasta","r") as file3:
+    for lines in file3:
+        lines = lines.strip()
+        # store the fasta header in header variable
+        if ">" in lines:
+            header = lines
+        else:
+            # translate the sequence
+            sequence = Seq(lines)
+            protein = sequence.translate()
+            protein= str(protein)
+
+# save the translated sequence in a new fasta file.
+f = open("aa_seq.fasta", "w")
+f.write(header + ".translated\n" + protein)
+f.close()
